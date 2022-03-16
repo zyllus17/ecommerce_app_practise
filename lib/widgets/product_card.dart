@@ -4,12 +4,16 @@ import 'package:flutter/material.dart';
 class ProductCard extends StatelessWidget {
   final Product product;
   final double widthFactor;
+  final double leftPosition;
+  final bool isWishlist;
   // final bool additionalButtons;
 
   const ProductCard({
     Key? key,
     required this.product,
     this.widthFactor = 2.25,
+    this.leftPosition = 5,
+    this.isWishlist = false,
     // this.additionalButtons = false,
   }) : super(key: key);
 
@@ -37,9 +41,9 @@ class ProductCard extends StatelessWidget {
           ),
           Positioned(
             top: 60,
-            left: 5,
+            left: leftPosition,
             child: Container(
-              width: widthValue - 10,
+              width: widthValue - 5 - leftPosition,
               height: 80,
               alignment: Alignment.bottomCenter,
               decoration: BoxDecoration(
@@ -49,9 +53,9 @@ class ProductCard extends StatelessWidget {
           ),
           Positioned(
             top: 65,
-            left: 10,
+            left: leftPosition + 5,
             child: Container(
-              width: widthValue - 20,
+              width: widthValue - 15 - leftPosition,
               height: 70,
               alignment: Alignment.bottomCenter,
               decoration: const BoxDecoration(
@@ -101,6 +105,15 @@ class ProductCard extends StatelessWidget {
                             //     );
                           },
                         ),
+                        isWishlist
+                            ? IconButton(
+                                icon: const Icon(
+                                  Icons.delete,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {},
+                              )
+                            : SizedBox(),
                         // additionalButtons
                         //     ? IconButton(
                         //         padding: EdgeInsets.zero,
