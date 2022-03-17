@@ -24,8 +24,8 @@ class AppRouter {
         return CatalogScreen.route(
           category: settings.arguments as Category,
         );
-      // case SplashScreen.routeName:
-      //   return SplashScreen.route();
+      case SplashScreen.routeName:
+        return SplashScreen.route();
       // case CheckoutScreen.routeName:
       //   return CheckoutScreen.route();
       default:
