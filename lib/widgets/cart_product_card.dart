@@ -7,11 +7,11 @@ class CartProductCard extends StatelessWidget {
   const CartProductCard({
     Key? key,
     required this.product,
-    // required this.quantity,
+    required this.quantity,
   }) : super(key: key);
 
   final Product product;
-  // final int quantity;
+  final int quantity;
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +54,8 @@ class CartProductCard extends StatelessWidget {
                     },
                   ),
                   Text(
-                    '1',
-                    style: Theme.of(context).textTheme.headline5,
+                    '$quantity',
+                    style: Theme.of(context).textTheme.headline4,
                   ),
                   IconButton(
                     icon: Icon(Icons.add_circle),
