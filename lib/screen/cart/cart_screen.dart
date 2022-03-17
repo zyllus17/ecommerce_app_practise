@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/model/cart_model.dart';
 import 'package:ecommerce_app/model/product_model.dart';
 import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,7 @@ class CartScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    'Add \$20.0 for FREE Delivery',
+                    '\$${Cart().freeDeliveryString}',
                     style: Theme.of(context).textTheme.headline5,
                   ),
                   ElevatedButton(
@@ -71,9 +72,14 @@ class CartScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 10),
-              CartProductCard(product: Product.products[0]),
-              CartProductCard(product: Product.products[1]),
-              CartProductCard(product: Product.products[2]),
+              SizedBox(
+                height: 300,
+                child: ListView.builder(
+                    itemCount: Cart.products.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return CartProductCard(product: Cart.products[index]);
+                    }),
+              ),
             ]),
             Column(
               children: [
@@ -88,7 +94,7 @@ class CartScreen extends StatelessWidget {
                         children: [
                           Text('SUBTOTAL',
                               style: Theme.of(context).textTheme.headline5),
-                          Text('\$5.98',
+                          Text('\$${Cart().subtotalString}',
                               style: Theme.of(context).textTheme.headline5),
                         ],
                       ),
@@ -98,7 +104,7 @@ class CartScreen extends StatelessWidget {
                         children: [
                           Text('DELIVERY FEE',
                               style: Theme.of(context).textTheme.headline5),
-                          Text('\$2.90',
+                          Text('\$${Cart().deliveryFeeString}',
                               style: Theme.of(context).textTheme.headline5),
                         ],
                       ),
@@ -136,7 +142,7 @@ class CartScreen extends StatelessWidget {
                                   .copyWith(color: Colors.white),
                             ),
                             Text(
-                              '\$12.90',
+                              '\$${Cart().totalString}',
                               style: Theme.of(context)
                                   .textTheme
                                   .headline5!
