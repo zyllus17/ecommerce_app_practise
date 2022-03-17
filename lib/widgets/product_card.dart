@@ -1,5 +1,7 @@
+import 'package:ecommerce_app/bloc/cart/cart_bloc.dart';
 import 'package:ecommerce_app/model/product_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -88,21 +90,34 @@ class ProductCard extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        IconButton(
-                          icon: const Icon(
-                            Icons.add_circle,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            // final snackBar = SnackBar(
-                            //   content: Text('Added to your Cart!'),
-                            // );
-                            // ScaffoldMessenger.of(context)
-                            //     .showSnackBar(snackBar);
+                        BlocBuilder<CartBloc, CartState>(
+                          builder: (context, state) {
+                            if (state is CartLoading) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            if (state is CartLoaded) {
+                              return IconButton(
+                                icon: const Icon(
+                                  Icons.add_circle,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {
+                                  // final snackBar = SnackBar(
+                                  //   content: Text('Added to your Cart!'),
+                                  // );
+                                  // ScaffoldMessenger.of(context)
+                                  //     .showSnackBar(snackBar);
 
-                            // context.read<CartBloc>().add(
-                            //       CartProductAdded(product),
-                            //     );
+                                  context.read<CartBloc>().add(
+                                        CartProductAdded(product),
+                                      );
+                                },
+                              );
+                            } else {
+                              return Text('Something went wrong');
+                            }
                           },
                         ),
                         isWishlist
