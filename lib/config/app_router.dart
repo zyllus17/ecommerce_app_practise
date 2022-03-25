@@ -26,8 +26,8 @@ class AppRouter {
         );
       case SplashScreen.routeName:
         return SplashScreen.route();
-      // case CheckoutScreen.routeName:
-      //   return CheckoutScreen.route();
+      case CheckoutScreen.routeName:
+        return CheckoutScreen.route();
       default:
         return _errorRoute();
     }
