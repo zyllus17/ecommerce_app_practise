@@ -14,7 +14,7 @@ class OrderSummary extends StatelessWidget {
         if (state is CartLoaded) {
           return Column(
             children: [
-              Divider(thickness: 2),
+              const Divider(thickness: 2),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
@@ -41,7 +41,7 @@ class OrderSummary extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Stack(
                 children: <Widget>[
                   Container(
@@ -53,10 +53,10 @@ class OrderSummary extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.all(5.0),
+                    margin: const EdgeInsets.all(5.0),
                     width: MediaQuery.of(context).size.width - 10,
                     height: 50,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.black,
                     ),
                     child: Padding(
@@ -88,7 +88,7 @@ class OrderSummary extends StatelessWidget {
             ],
           );
         } else {
-          return Text('Something went wrong.');
+          return const Text('Something went wrong.');
         }
       },
     );

@@ -4,29 +4,31 @@ import 'package:flutter/material.dart';
 class SplashScreen extends StatelessWidget {
   static const String routeName = '/splash';
 
+  const SplashScreen({Key? key}) : super(key: key);
+
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (context) => SplashScreen(),
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const SplashScreen(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    Timer(Duration(seconds: 2), () => Navigator.pushNamed(context, '/'));
+    Timer(const Duration(seconds: 2), () => Navigator.pushNamed(context, '/'));
 
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(
+          const Center(
             child: Image(
               image: AssetImage('assets/images/logo.png'),
               width: 125,
               height: 125,
             ),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Container(
             color: Colors.black,
             padding: const EdgeInsets.symmetric(

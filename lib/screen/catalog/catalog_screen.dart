@@ -1,7 +1,5 @@
 import 'package:ecommerce_app/model/category_model.dart';
 import 'package:ecommerce_app/model/product_model.dart';
-import 'package:ecommerce_app/widgets/custom_navbar.dart';
-import 'package:ecommerce_app/widgets/product_card.dart';
 import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +24,7 @@ class CatalogScreen extends StatelessWidget {
         .toList();
     return Scaffold(
       appBar: CustomAppBar(title: category.name),
-      bottomNavigationBar: CustomNavBar(screen: routeName),
+      bottomNavigationBar: const CustomNavBar(screen: routeName),
       body: GridView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

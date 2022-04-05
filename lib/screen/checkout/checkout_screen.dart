@@ -6,24 +6,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CheckoutScreen extends StatelessWidget {
   static const String routeName = '/checkout';
 
+  const CheckoutScreen({Key? key}) : super(key: key);
+
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (context) => CheckoutScreen(),
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const CheckoutScreen(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Checkout'),
-      bottomNavigationBar: CustomNavBar(screen: routeName),
+      appBar: const CustomAppBar(title: 'Checkout'),
+      bottomNavigationBar: const CustomNavBar(screen: routeName),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: BlocBuilder<CheckoutBloc, CheckoutState>(
           builder: (context, state) {
             if (state is CheckoutLoading) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
@@ -47,7 +49,7 @@ class CheckoutScreen extends StatelessWidget {
                           .read<CheckoutBloc>()
                           .add(UpdateCheckout(fullName: value));
                     }, context, 'Full Name'),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text(
                       'DELIVERY INFORMATION',
                       style: Theme.of(context).textTheme.headline3,
@@ -72,7 +74,7 @@ class CheckoutScreen extends StatelessWidget {
                           .read<CheckoutBloc>()
                           .add(UpdateCheckout(zipCode: value));
                     }, context, 'ZIP Code'),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Container(
                       width: MediaQuery.of(context).size.width,
                       height: 60,
@@ -92,7 +94,7 @@ class CheckoutScreen extends StatelessWidget {
                           ),
                           IconButton(
                             onPressed: () {},
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.arrow_forward,
                               color: Colors.white,
                             ),
@@ -100,17 +102,17 @@ class CheckoutScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text(
                       'ORDER SUMMARY',
                       style: Theme.of(context).textTheme.headline3,
                     ),
-                    OrderSummary()
+                    const OrderSummary()
                   ],
                 ),
               );
             } else {
-              return Text('Something went wrong');
+              return const Text('Something went wrong');
             }
           },
         ),
@@ -137,9 +139,9 @@ class CheckoutScreen extends StatelessWidget {
           Expanded(
             child: TextFormField(
               onChanged: onChanged,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 isDense: true,
-                contentPadding: const EdgeInsets.only(left: 10),
+                contentPadding: EdgeInsets.only(left: 10),
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.black),
                 ),

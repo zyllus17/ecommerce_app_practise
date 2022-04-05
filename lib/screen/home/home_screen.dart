@@ -1,14 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_app/bloc/category/category_bloc.dart';
 import 'package:ecommerce_app/bloc/product/product_bloc.dart';
-import 'package:ecommerce_app/model/product_model.dart';
-import 'package:ecommerce_app/widgets/product_card.dart';
-import 'package:ecommerce_app/widgets/product_carousel.dart';
-import 'package:ecommerce_app/widgets/section_title.dart';
 import 'package:flutter/material.dart';
 
-import 'package:ecommerce_app/model/category_model.dart';
-import 'package:ecommerce_app/widgets/custom_navbar.dart';
 import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +14,7 @@ class HomeScreen extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: '/error'),
-      builder: (_) => HomeScreen(),
+      builder: (_) => const HomeScreen(),
     );
   }
 
@@ -35,7 +29,7 @@ class HomeScreen extends StatelessWidget {
             BlocBuilder<CategoryBloc, CategoryState>(
               builder: (context, state) {
                 if (state is CategoryLoading) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -52,15 +46,15 @@ class HomeScreen extends StatelessWidget {
                         .toList(),
                   );
                 } else {
-                  return Text('Something went wrong.');
+                  return const Text('Something went wrong.');
                 }
               },
             ),
-            SectionTitle(title: 'RECOMMENDED'),
+            const SectionTitle(title: 'RECOMMENDED'),
             BlocBuilder<ProductBloc, ProductState>(
               builder: (context, state) {
                 if (state is ProductLoading) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -71,15 +65,15 @@ class HomeScreen extends StatelessWidget {
                         .toList(),
                   );
                 } else {
-                  return Text('Something went wrong.');
+                  return const Text('Something went wrong.');
                 }
               },
             ),
-            SectionTitle(title: 'MOST POPULAR'),
+            const SectionTitle(title: 'MOST POPULAR'),
             BlocBuilder<ProductBloc, ProductState>(
               builder: (context, state) {
                 if (state is ProductLoading) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -90,7 +84,7 @@ class HomeScreen extends StatelessWidget {
                         .toList(),
                   );
                 } else {
-                  return Text('Something went wrong.');
+                  return const Text('Something went wrong.');
                 }
               },
             ),
