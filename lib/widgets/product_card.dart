@@ -1,22 +1,18 @@
-import 'package:ecommerce_app/bloc/cart/cart_bloc.dart';
-import 'package:ecommerce_app/model/product_model.dart';
+import 'package:ecommerce_app/bloc/bloc.dart';
+import 'package:ecommerce_app/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
   final double widthFactor;
-  final double leftPosition;
-  final bool isWishlist;
-  // final bool additionalButtons;
+  final bool additionalButtons;
 
   const ProductCard({
     Key? key,
     required this.product,
     this.widthFactor = 2.25,
-    this.leftPosition = 5,
-    this.isWishlist = false,
-    // this.additionalButtons = false,
+    this.additionalButtons = false,
   }) : super(key: key);
 
   @override
@@ -43,9 +39,9 @@ class ProductCard extends StatelessWidget {
           ),
           Positioned(
             top: 60,
-            left: leftPosition,
+            left: 5,
             child: Container(
-              width: widthValue - 5 - leftPosition,
+              width: widthValue - 10,
               height: 80,
               alignment: Alignment.bottomCenter,
               decoration: BoxDecoration(
@@ -55,9 +51,9 @@ class ProductCard extends StatelessWidget {
           ),
           Positioned(
             top: 65,
-            left: leftPosition + 5,
+            left: 10,
             child: Container(
-              width: widthValue - 15 - leftPosition,
+              width: widthValue - 20,
               height: 70,
               alignment: Alignment.bottomCenter,
               decoration: const BoxDecoration(
@@ -93,8 +89,9 @@ class ProductCard extends StatelessWidget {
                         BlocBuilder<CartBloc, CartState>(
                           builder: (context, state) {
                             if (state is CartLoading) {
-                              return Center(
-                                child: CircularProgressIndicator(),
+                              return const Center(
+                                child: CircularProgressIndicator(
+                                    color: Colors.white),
                               );
                             }
                             if (state is CartLoaded) {
@@ -104,51 +101,42 @@ class ProductCard extends StatelessWidget {
                                   color: Colors.white,
                                 ),
                                 onPressed: () {
-                                  // final snackBar = SnackBar(
-                                  //   content: Text('Added to your Cart!'),
-                                  // );
-                                  // ScaffoldMessenger.of(context)
-                                  //     .showSnackBar(snackBar);
+                                  final snackBar = const SnackBar(
+                                    content: Text('Added to your Cart!'),
+                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
 
                                   context.read<CartBloc>().add(
-                                        CartProductAdded(product),
+                                        AddProduct(product),
                                       );
                                 },
                               );
                             } else {
-                              return Text('Something went wrong');
+                              return const Text('Something went wrong.');
                             }
                           },
                         ),
-                        isWishlist
+                        additionalButtons
                             ? IconButton(
+                                padding: EdgeInsets.zero,
                                 icon: const Icon(
                                   Icons.delete,
                                   color: Colors.white,
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  final snackBar = const SnackBar(
+                                    content:
+                                        Text('Removed from your Wishlist!'),
+                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                  context
+                                      .read<WishlistBloc>()
+                                      .add(RemoveProductFromWishlist(product));
+                                },
                               )
-                            : SizedBox(),
-                        // additionalButtons
-                        //     ? IconButton(
-                        //         padding: EdgeInsets.zero,
-                        //         icon: Icon(
-                        //           Icons.delete,
-                        //           color: Colors.white,
-                        //         ),
-                        //         onPressed: () {
-                        //           final snackBar = SnackBar(
-                        //             content:
-                        //                 Text('Removed from your Wishlist!'),
-                        //           );
-                        //           ScaffoldMessenger.of(context)
-                        //               .showSnackBar(snackBar);
-                        //           context
-                        //               .read<WishlistBloc>()
-                        //               .add(WishlistProductRemoved(product));
-                        //         },
-                        //       )
-                        //     : SizedBox()
+                            : const SizedBox()
                       ],
                     )
                   ],

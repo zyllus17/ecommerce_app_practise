@@ -53,19 +53,19 @@ class CustomNavBar extends StatelessWidget {
   List<Widget> _buildNavBar(context) {
     return [
       IconButton(
-        icon: Icon(Icons.home, color: Colors.white),
+        icon: const Icon(Icons.home, color: Colors.white),
         onPressed: () {
           Navigator.pushNamed(context, '/');
         },
       ),
       IconButton(
-        icon: Icon(Icons.shopping_cart, color: Colors.white),
+        icon: const Icon(Icons.shopping_cart, color: Colors.white),
         onPressed: () {
           Navigator.pushNamed(context, '/cart');
         },
       ),
       IconButton(
-        icon: Icon(Icons.person, color: Colors.white),
+        icon: const Icon(Icons.person, color: Colors.white),
         onPressed: () {
           Navigator.pushNamed(context, '/user');
         },
@@ -76,42 +76,42 @@ class CustomNavBar extends StatelessWidget {
   List<Widget> _buildAddToCartNavBar(context, product) {
     return [
       IconButton(
-        icon: Icon(Icons.share, color: Colors.white),
+        icon: const Icon(Icons.share, color: Colors.white),
         onPressed: () {},
       ),
       BlocBuilder<WishlistBloc, WishlistState>(
         builder: (context, state) {
           if (state is WishlistLoading) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
           if (state is WishlistLoaded) {
             return IconButton(
-              icon: Icon(Icons.favorite, color: Colors.white),
+              icon: const Icon(Icons.favorite, color: Colors.white),
               onPressed: () {
-                // final snackBar =
-                //     SnackBar(content: Text('Added to your Wishlist!'));
-                // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                // context.read<WishlistBloc>().add(WishlistProductAdded(product));
+                final snackBar =
+                    const SnackBar(content: Text('Added to your Wishlist!'));
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                context.read<WishlistBloc>().add(AddProductToWishlist(product));
               },
             );
           }
-          return Text('Something went wrong!');
+          return const Text('Something went wrong!');
         },
       ),
       BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
           if (state is CartLoading) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
           if (state is CartLoaded) {
             return ElevatedButton(
               onPressed: () {
-                context.read<CartBloc>().add(CartProductAdded(product));
+                context.read<CartBloc>().add(AddProduct(product));
                 Navigator.pushNamed(context, '/cart');
               },
               style: ElevatedButton.styleFrom(
                 primary: Colors.white,
-                shape: RoundedRectangleBorder(),
+                shape: const RoundedRectangleBorder(),
               ),
               child: Text(
                 'ADD TO CART',
@@ -119,7 +119,7 @@ class CustomNavBar extends StatelessWidget {
               ),
             );
           }
-          return Text('Something went wrong!');
+          return const Text('Something went wrong!');
         },
       )
     ];
@@ -133,7 +133,7 @@ class CustomNavBar extends StatelessWidget {
         },
         style: ElevatedButton.styleFrom(
           primary: Colors.white,
-          shape: RoundedRectangleBorder(),
+          shape: const RoundedRectangleBorder(),
         ),
         child: Text(
           'GO TO CHECKOUT',
@@ -148,7 +148,7 @@ class CustomNavBar extends StatelessWidget {
       BlocBuilder<CheckoutBloc, CheckoutState>(
         builder: (context, state) {
           if (state is CheckoutLoading) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -161,7 +161,7 @@ class CustomNavBar extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 primary: Colors.white,
-                shape: RoundedRectangleBorder(),
+                shape: const RoundedRectangleBorder(),
               ),
               child: Text(
                 'ORDER NOW',
@@ -169,7 +169,7 @@ class CustomNavBar extends StatelessWidget {
               ),
             );
           } else {
-            return Text('Something went wrong');
+            return const Text('Something went wrong');
           }
         },
       )

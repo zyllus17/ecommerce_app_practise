@@ -1,17 +1,18 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:ecommerce_app/bloc/cart/cart_bloc.dart';
 import 'package:ecommerce_app/bloc/wishlist/wishlist_bloc.dart';
 import 'package:ecommerce_app/model/product_model.dart';
 import 'package:ecommerce_app/widgets/widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductScreen extends StatelessWidget {
   static const String routeName = '/product';
 
   static Route route({required Product product}) {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
+      settings: const RouteSettings(name: routeName),
       builder: (context) => ProductScreen(product: product),
     );
   }
@@ -19,8 +20,9 @@ class ProductScreen extends StatelessWidget {
   final Product product;
 
   const ProductScreen({
+    Key? key,
     required this.product,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,18 +36,18 @@ class ProductScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
-                icon: Icon(Icons.share, color: Colors.white),
+                icon: const Icon(Icons.share, color: Colors.white),
                 onPressed: () {},
               ),
               BlocBuilder<WishlistBloc, WishlistState>(
                 builder: (context, state) {
                   return IconButton(
-                    icon: Icon(Icons.favorite, color: Colors.white),
+                    icon: const Icon(Icons.favorite, color: Colors.white),
                     onPressed: () {
                       context
                           .read<WishlistBloc>()
-                          .add(AddWishlistProduct(product));
-                      final snackBar =
+                          .add(AddProductToWishlist(product));
+                      const snackBar =
                           SnackBar(content: Text('Added to your Wishlist!'));
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
@@ -56,7 +58,7 @@ class ProductScreen extends StatelessWidget {
                 builder: (context, state) {
                   return ElevatedButton(
                     onPressed: () {
-                      context.read<CartBloc>().add(CartProductAdded(product));
+                      context.read<CartBloc>().add(AddProduct(product));
                       Navigator.pushNamed(context, '/cart');
                     },
                     style: ElevatedButton.styleFrom(
@@ -99,10 +101,10 @@ class ProductScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.all(5.0),
+                      margin: const EdgeInsets.all(5.0),
                       width: MediaQuery.of(context).size.width - 10,
                       height: 50,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.black,
                       ),
                       child: Padding(

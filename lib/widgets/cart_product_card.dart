@@ -26,7 +26,7 @@ class CartProductCard extends StatelessWidget {
             width: 100,
             height: 80,
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,15 +42,15 @@ class CartProductCard extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           BlocBuilder<CartBloc, CartState>(
             builder: (context, state) {
               return Row(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.remove_circle),
+                    icon: const Icon(Icons.remove_circle),
                     onPressed: () {
-                      context.read<CartBloc>().add(CartProductRemoved(product));
+                      context.read<CartBloc>().add(RemoveProduct(product));
                     },
                   ),
                   Text(
@@ -58,9 +58,9 @@ class CartProductCard extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline4,
                   ),
                   IconButton(
-                    icon: Icon(Icons.add_circle),
+                    icon: const Icon(Icons.add_circle),
                     onPressed: () {
-                      context.read<CartBloc>().add(CartProductAdded(product));
+                      context.read<CartBloc>().add(AddProduct(product));
                     },
                   ),
                 ],
