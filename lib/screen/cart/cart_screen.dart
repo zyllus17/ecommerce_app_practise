@@ -6,22 +6,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CartScreen extends StatelessWidget {
   static const String routeName = '/cart';
 
+  const CartScreen({Key? key}) : super(key: key);
+
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (context) => CartScreen(),
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const CartScreen(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Cart'),
-      bottomNavigationBar: CustomNavBar(screen: routeName),
+      appBar: const CustomAppBar(title: 'Cart'),
+      bottomNavigationBar: const CustomNavBar(screen: routeName),
       body: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
           if (state is CartLoading) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
           if (state is CartLoaded) {
             return Padding(
@@ -43,7 +45,7 @@ class CartScreen extends StatelessWidget {
                           },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.black,
-                            shape: RoundedRectangleBorder(),
+                            shape: const RoundedRectangleBorder(),
                             elevation: 0,
                           ),
                           child: Text(
@@ -56,7 +58,7 @@ class CartScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     SizedBox(
                       height: 400,
                       child: ListView.builder(
@@ -77,13 +79,13 @@ class CartScreen extends StatelessWidget {
                             );
                           }),
                     ),
-                    OrderSummary(),
+                    const OrderSummary(),
                   ],
                 ),
               ),
             );
           }
-          return Text('Something went wrong');
+          return const Text('Something went wrong');
         },
       ),
     );
