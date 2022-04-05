@@ -16,7 +16,7 @@ class UpdateCheckout extends CheckoutEvent {
   final String? zipCode;
   final Cart? cart;
 
-  UpdateCheckout(
+  const UpdateCheckout(
       {this.fullName,
       this.email,
       this.address,

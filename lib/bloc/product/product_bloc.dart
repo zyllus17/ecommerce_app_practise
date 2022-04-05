@@ -14,21 +14,12 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
   ProductBloc({required ProductRepository productRepository})
       : _productRepository = productRepository,
-        super(ProductLoading());
-
-  @override
-  Stream<ProductState> mapEventToState(
-    ProductEvent event,
-  ) async* {
-    if (event is LoadProducts) {
-      yield* _mapLoadProductsToState();
-    }
-    if (event is UpdateProducts) {
-      yield* _mapUpdateProductsToState(event);
-    }
+        super(ProductLoading()) {
+    on<LoadProducts>(_onLoadProducts);
+    on<UpdateProducts>(_onUpdateProducts);
   }
 
-  Stream<ProductState> _mapLoadProductsToState() async* {
+  void _onLoadProducts(event, Emitter<ProductState> emit) {
     _productSubscription?.cancel();
     _productSubscription = _productRepository.getAllProducts().listen(
           (products) => add(
@@ -37,7 +28,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         );
   }
 
-  Stream<ProductState> _mapUpdateProductsToState(UpdateProducts event) async* {
-    yield ProductLoaded(products: event.products);
+  void _onUpdateProducts(
+    UpdateProducts event,
+    Emitter<ProductState> emit,
+  ) {
+    emit(ProductLoaded(products: event.products));
   }
 }
