@@ -84,12 +84,18 @@ class CheckoutScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Center(
-                            child: Text(
-                              'SELECT A PAYMENT METHOD',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline3!
-                                  .copyWith(color: Colors.white),
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                    context, '/payment-selection');
+                              },
+                              child: Text(
+                                'SELECT A PAYMENT METHOD',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline3!
+                                    .copyWith(color: Colors.white),
+                              ),
                             ),
                           ),
                           IconButton(
