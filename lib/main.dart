@@ -2,6 +2,7 @@ import 'package:ecommerce_app/bloc/bloc.dart';
 import 'package:ecommerce_app/config/app_router.dart';
 import 'package:ecommerce_app/config/theme.dart';
 import 'package:ecommerce_app/repositories/repositories.dart';
+import 'package:ecommerce_app/screen/payment_selection/payment_selection_screen.dart';
 import 'package:ecommerce_app/screen/screen.dart';
 import 'package:ecommerce_app/simple_bloc_observer.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: theme(),
         onGenerateRoute: AppRouter.onGenerateRoute,
-        initialRoute: OrderConfirmation.routeName,
+        initialRoute: PaymentSelection.routeName,
       ),
     );
   }
