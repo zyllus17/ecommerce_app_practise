@@ -1,3 +1,4 @@
+export 'apple_pay.dart';
 export 'cart_product_card.dart';
 export 'custom_appbar.dart';
 export 'custom_navbar.dart';

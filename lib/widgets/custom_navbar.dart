@@ -2,6 +2,7 @@ import 'package:ecommerce_app/bloc/cart/cart_bloc.dart';
 import 'package:ecommerce_app/bloc/checkout/checkout_bloc.dart';
 import 'package:ecommerce_app/bloc/wishlist/wishlist_bloc.dart';
 import 'package:ecommerce_app/model/model.dart';
+import 'package:ecommerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,6 +38,8 @@ class CustomNavBar extends StatelessWidget {
       case '/catalog':
         return _buildNavBar(context);
       case '/wishlist':
+        return _buildNavBar(context);
+      case '/payment-selection':
         return _buildNavBar(context);
       case '/order-confirmation':
         return _buildNavBar(context);
@@ -155,22 +158,26 @@ class CustomNavBar extends StatelessWidget {
             );
           }
           if (state is CheckoutLoaded) {
-            return ElevatedButton(
-              onPressed: () {
-                context
-                    .read<CheckoutBloc>()
-                    .add(ConfirmCheckout(checkout: state.checkout));
-                Navigator.pushNamed(context, '/order-confirmation');
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                shape: const RoundedRectangleBorder(),
-              ),
-              child: Text(
-                'ORDER NOW',
-                style: Theme.of(context).textTheme.headline3,
-              ),
+            return ApplePay(
+              products: state.products!,
+              total: state.total!,
             );
+            // return ElevatedButton(
+            //   onPressed: () {
+            //     context
+            //         .read<CheckoutBloc>()
+            //         .add(ConfirmCheckout(checkout: state.checkout));
+            //     Navigator.pushNamed(context, '/order-confirmation');
+            //   },
+            //   style: ElevatedButton.styleFrom(
+            //     primary: Colors.white,
+            //     shape: const RoundedRectangleBorder(),
+            //   ),
+            //   child: Text(
+            //     'ORDER NOW',
+            //     style: Theme.of(context).textTheme.headline3,
+            //   ),
+            // );
           } else {
             return const Text('Something went wrong');
           }
